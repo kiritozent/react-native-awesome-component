@@ -5,7 +5,7 @@ import { Container } from '../styled/share.styled'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
 import { LeftContainer, LeftTouchableContainer, TitleContainer, ActionTitle, Title, RightContainer, RightTouchableContainer } from './styled'
-import { getStatusBarHeight, isIphoneX } from 'react-native-iphone-x-helper'
+import { getStatusBarHeight } from 'react-native-iphone-x-helper'
 import AntDesign from 'react-native-vector-icons/AntDesign'
 import Entypo from 'react-native-vector-icons/Entypo'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
@@ -124,8 +124,7 @@ const CustomHeader = (props) => {
     iconType,
   } = props
 
-  const iPhoneX = isIphoneX();
-  const headerPaddingTop = Platform.OS === 'ios' ? iPhoneX ? getStatusBarHeight() : 0 : 0
+  const headerPaddingTop = Platform.OS === 'ios' ? iphoneXPadding ? getStatusBarHeight() : 0 : 0
   let headerTitle = ''
   let isFirstRoute = false
 
