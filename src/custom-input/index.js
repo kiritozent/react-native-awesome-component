@@ -456,8 +456,8 @@ class CustomInput extends Component {
       borderBottomColor: underlineColor ? underlineColor : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_COLOR,
     }
 
-    let labelStyle = this.props.labelStyle ? this.props.labelStyle : GlobalConst.getValue().CUSTOM_INPUT_LABEL_STYLE
-    let errorLabelStyle = this.props.errorLabelStyle ? this.props.errorLabelStyle : GlobalConst.getValue().CUSTOM_INPUT_ERROR_LABEL_STYLE
+    let labelStyle = {}
+    let errorLabelStyle = {}
     let errorLabel = <View />
 
     // HANDLE ERROR STYLE
@@ -611,6 +611,7 @@ class CustomInput extends Component {
             </TouchableOpacity> :
             <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
               {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+              {renderLeftAction && (typeof renderLeftAction === 'function') && render()}
               {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
               <StyledTextInput
                 ref={currentRef => this.setRef(currentRef)}

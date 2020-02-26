@@ -1,6 +1,10 @@
 {
   "name": "react-native-awesome-component",
+<<<<<<< Updated upstream
   "version": "0.1.48",
+=======
+  "version": "0.1.29",
+>>>>>>> Stashed changes
   "description": "React Native Awesome Component",
   "main": "index.js",
   "typings": "./index.d.ts",

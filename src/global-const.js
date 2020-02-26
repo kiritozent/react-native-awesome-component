@@ -14,6 +14,7 @@ const DEFAULT_GLOBAL_CONST = {
   PADDING: metrics.padding,
   SAFE_AREA_BACKGROUND_COLOR: Colors.white,
   BACKGROUND_COLOR: Colors.white,
+  PLACEHOLDER_ANIMATION: true,
 
   // BUTTON STYLE
   ACTIVE_BUTTON_COLOR: Colors.turqoise,
@@ -197,6 +198,9 @@ export function setGlobalSafeAreaBackgroundColor(value) {
 }
 export function setGlobalBackgroundColor(value) {
   globalConst = Object.appendObject(globalConst, 'BACKGROUND_COLOR', value)
+}
+export function setPlaceholderAnimation(value) {
+  globalConst = {...globalConst, PLACEHOLDER_ANIMATION: value}
 }
 
 // BUTTON FUNCTION

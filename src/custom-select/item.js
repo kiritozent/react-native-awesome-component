@@ -31,7 +31,7 @@ const Item = props => {
     }
   }, []);
 
-  const isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription].toLowerCase() === keyOther));
+  const isOther = !isEmptyOrSpaces(keyOther) && ((!keyDescription && !isEmptyOrSpaces(item) && item.toLowerCase().includes(keyOther)) || (keyDescription && item[keyDescription] && item[keyDescription].toLowerCase() === keyOther));
 
   const iconType = GlobalConst.getValue().CUSTOM_SELECT_ICON_TYPE
   const iconSelectName = multiSelect ? GlobalConst.getValue().CUSTOM_SELECT_ITEM_MULTI_SELECT_ICON_NAME : GlobalConst.getValue().CUSTOM_SELECT_ITEM_SELECT_ICON_NAME

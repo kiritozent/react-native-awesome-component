@@ -85,7 +85,10 @@ export function getFileNameFromURL(url) {
 }
 
 export function stringEquals(str1, str2) {
-  return str1.toLowerCase() === str2.toLowerCase();
+  if (!isEmptyOrSpaces(str1) && !isEmptyOrSpaces(str2)) {
+    return str1.toLowerCase() === str2.toLowerCase();
+  }
+  return false;
 }
 
 export function isEmptyOrSpaces(str) {
