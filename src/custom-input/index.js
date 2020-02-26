@@ -480,8 +480,8 @@ class CustomInput extends Component {
       borderBottomColor: underlineColor ? underlineColor : GlobalConst.getValue().CUSTOM_INPUT_UNDERLINE_COLOR,
     }
 
-    let labelStyle = this.props.labelStyle ? this.props.labelStyle : GlobalConst.getValue().CUSTOM_INPUT_LABEL_STYLE
-    let errorLabelStyle = this.props.errorLabelStyle ? this.props.errorLabelStyle : GlobalConst.getValue().CUSTOM_INPUT_ERROR_LABEL_STYLE
+    let labelStyle = {}
+    let errorLabelStyle = {}
     let errorLabel = <View />
 
     // HANDLE ERROR STYLE
@@ -600,7 +600,7 @@ class CustomInput extends Component {
         <Container style={[lContainerStyle]}>
           {labelType === LABEL_TYPE.top && label && this.renderLabel(labelType, labelStyle)}
           {labelType === LABEL_TYPE.left && label && this.renderLabel(labelType, labelStyle)}
-          {onPress ? (
+          {onPress ? 
             <TouchableOpacity activeOpacity={0.8} onPress={onPress} disabled={!editable} style={[styledTextInputContainerStyle]}>
               <StyledTextInputContainer>
                 {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
@@ -632,38 +632,37 @@ class CustomInput extends Component {
                 />
                 {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
               </StyledTextInputContainer>
-            </TouchableOpacity>
-          ) : (
-              <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
-                {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
-                {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
-                <StyledTextInput
-                  ref={currentRef => this.setRef(currentRef)}
-                  secureTextEntry={inputType === INPUT_TYPE.password}
-                  {...activeProps}
-                  underlineColorAndroid={'transparent'}
-                  style={[textInputStyle]}
-                  defaultValue={formikProps.initialValues.value}
-                  onChangeText={formikProps.handleChange('value')}
-                  value={formikProps.values.value}
-                  onSubmitEditing={formikProps.handleSubmit}
-                  onFocus={() => {
-                    formikProps.setFieldTouched('value');
-                    if (onFocus) {
-                      onFocus();
-                    }
-                  }}
-                  onBlur={() => {
-                    formikProps.setFieldTouched('value', false);
-                    if (onBlur) {
-                      onBlur();
-                    }
-                  }}
-                  keyboardType={this.getKeyboardType(inputType)}
-                />
-                {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
-              </StyledTextInputContainer>
-            )
+            </TouchableOpacity> :
+            <StyledTextInputContainer style={[styledTextInputContainerStyle]}>
+              {renderLeftAction && (typeof renderLeftAction === 'function') && renderLeftAction()}
+              {renderLeftAction && (typeof renderLeftAction === 'function') && render()}
+              {inputType === INPUT_TYPE.phoneCountry && this.renderModalSelectCountry(formikProps)}
+              <StyledTextInput
+                ref={currentRef => this.setRef(currentRef)}
+                secureTextEntry={inputType === INPUT_TYPE.password}
+                {...activeProps}
+                underlineColorAndroid={'transparent'}
+                style={[textInputStyle]}
+                defaultValue={formikProps.initialValues.value}
+                onChangeText={formikProps.handleChange('value')}
+                value={formikProps.values.value}
+                onSubmitEditing={formikProps.handleSubmit}
+                onFocus={() => {
+                  formikProps.setFieldTouched('value');
+                  if (onFocus) {
+                    onFocus();
+                  }
+                }}
+                onBlur={() => {
+                  formikProps.setFieldTouched('value', false);
+                  if (onBlur) {
+                    onBlur();
+                  }
+                }}
+                keyboardType={this.getKeyboardType(inputType)}
+              />
+              {renderRightAction && (typeof renderRightAction === 'function') && renderRightAction()}
+            </StyledTextInputContainer>
           }
           {labelType === LABEL_TYPE.right && label && this.renderLabel(labelStyle)}
         </Container>

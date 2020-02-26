@@ -12,11 +12,13 @@ class PlaceholderText extends Component {
   static propTypes = {
     ...TextProps,
     disableAnimation: PropTypes.bool,
+    animation: PropTypes.bool
   }
 
   static defaultProps = {
     numberOfLines: 3,
     disableAnimation: false,
+    animation: undefined,
   }
 
   constructor(props) {
@@ -44,8 +46,9 @@ class PlaceholderText extends Component {
   }
 
   renderLinePlaceHolder() {
-    const { numberOfLines, style, disableAnimation } = this.props
+    const { numberOfLines, style, disableAnimation, animation } = this.props
     let height = GlobalConst.getValue().FONT_SIZE
+    let placeholderAnimation = typeof animation === 'boolean' ? animation : GlobalConst.getValue().PLACEHOLDER_ANIMATION
     if (style && style.fontSize) {
       height = style.fontSize
     }
@@ -80,7 +83,7 @@ class PlaceholderText extends Component {
   }
 
   render() {
-    const { numberOfLines, children, style } = this.props
+    const { numberOfLines, children, style, animation } = this.props
     let childrenStringValue
     if (children !== undefined) {
       childrenStringValue = this.getValueOfTextChildren(children)

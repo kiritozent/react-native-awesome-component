@@ -4,8 +4,12 @@ import PropTypes from 'prop-types'
 import { StyledImage } from '../styled/share.styled'
 import Placeholder, { Media } from 'rn-placeholder'
 import Colors from '../colors'
+import * as GlobalConst from '../global-const'
+import { isEmptyOrSpaces } from '../method/helper'
 
 class PlaceholderImage extends Component {
+  StyledImageRef;
+
   static propTypes = {
     uri: PropTypes.string,
     width: PropTypes.number,
@@ -18,6 +22,7 @@ class PlaceholderImage extends Component {
     resizeMode: PropTypes.oneOf(["cover", "contain", "stretch", "repeat", "center"]),
     isCard: PropTypes.bool,
     disableAnimation: PropTypes.bool,
+    animation: PropTypes.bool,
   }
 
   static defaultProps = {
@@ -31,6 +36,7 @@ class PlaceholderImage extends Component {
     defaultSource: require('./image-placeholder.png'),
     isCard: true,
     disableAnimation: false,
+    animation: undefined,
   }
 
   constructor(props) {
@@ -39,16 +45,42 @@ class PlaceholderImage extends Component {
       loading: true,
       error: false
     }
-    this.onLoad = this.onLoad.bind(this)
+    this.onLoadStart = this.onLoadStart.bind(this)
     this.onError = this.onError.bind(this)
+    this.onLoadEnd = this.onLoadEnd.bind(this)
+    this.checkImageURL = this.checkImageURL.bind(this)
   }
 
-  onLoad() {
-    this.setState({ loading: false, error: false })
+  onLoadStart() {
+    this.setState({ loading: true, error: false })
   }
 
   onError() {
     this.setState({ loading: false, error: true })
+  }
+
+  onLoadEnd() {
+    this.setState({ loading: false, error: false })
+  }
+
+  componentDidMount() {
+    this.checkImageURL()
+  }
+
+  async checkImageURL() {
+    const { uri } = this.props
+
+    try {
+      this.onLoadStart()
+      const resp = await fetch(uri)
+      if (resp.status >= 200 && resp.status < 300) {
+        this.onLoadEnd()
+      } else {
+        this.onError()
+      }
+    } catch(err) {
+      this.onError()
+    }
   }
 
   render() {
@@ -64,12 +96,34 @@ class PlaceholderImage extends Component {
       borderColor,
       isCard,
       disableAnimation,
+      loading: loadingProps,
+      animation,
     } = this.props
 
-    const { loading } = this.state
+    console.tron.warn({loadingProps})
+
+    const { loading, error } = this.state
+    const placeholderAnimation = typeof animation === 'boolean' ? animation : GlobalConst.getValue().PLACEHOLDER_ANIMATION
+
     return (
       <View>
-        {(!loading || uri !== undefined || uri !== '') ? (
+        {(loadingProps || (loading && !error)) ? (
+          <View style={{ width, height }}>
+            <Placeholder
+              animation={placeholderAnimation ? 'shine' : null}
+            >
+              <Media
+                style={{
+                  width,
+                  height,
+                  borderWidth,
+                  borderColor,
+                  borderRadius: radius,
+                }}
+              />
+            </Placeholder>
+          </View>
+        ) : (
           <StyledImage
             source={{ uri }}
             resizeMethod={resizeMethod}
@@ -82,41 +136,8 @@ class PlaceholderImage extends Component {
               borderRadius: radius,
             }}
             defaultSource={defaultSource}
-            onLoad={this.onLoad}
-            onError={this.onError}
             isCard={isCard}
           />
-        ) : (
-            <View
-              style={{
-                width,
-                height,
-                borderWidth,
-                borderColor,
-                borderRadius: radius,
-              }}
-            />
-          )}
-        {(loading || uri === undefined || uri === '') && (
-          <View style={{ marginTop: -height }}>
-            {disableAnimation ? (
-              <View style={{ backgroundColor: Colors.very_light_pink_two, width, height, borderRadius: radius, borderColor, borderWidth }} />
-            ) : (
-                <Placeholder
-                  animation={'shine'}
-                >
-                  <Media
-                    style={{
-                      width,
-                      height,
-                      borderWidth,
-                      borderColor,
-                      borderRadius: radius,
-                    }}
-                  />
-                </Placeholder>
-              )}
-          </View>
         )}
       </View>
     )

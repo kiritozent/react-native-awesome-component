@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
-import { FlatList, ActivityIndicator } from 'react-native'
+import { FlatList, FlatListProps, View, ScrollView, ActivityIndicator } from 'react-native'
 import PropTypes from 'prop-types'
 // import { CustomFlatListStyle } from '../Components/styled/custom-flatlist.styled'
 import { getConnectionStatus } from '../connection-handler/connection-error-helper'
 import { getBottomSpace } from 'react-native-iphone-x-helper';
-import * as Styled from '../styled/share.styled'
 import * as Obj from '../method/object'
 import * as GlobalConst from '../global-const'
-import _ from 'lodash'
-import Colors from 'react-native-awesome-component/src/colors';
 
 class CustomFlatList extends Component {
   static propTypes = {
@@ -31,6 +28,8 @@ class CustomFlatList extends Component {
     disableRenderNoConnection: PropTypes.bool,
     disableRenderEmpty: PropTypes.bool,
     disableRenderError: PropTypes.bool,
+    isLoadmore: PropTypes.bool,
+    initialNumToRender: PropTypes.number,
   }
 
   static defaultProps = {
@@ -44,6 +43,8 @@ class CustomFlatList extends Component {
     disableRenderNoConnection: false,
     disableRenderEmpty: false,
     disableRenderError: false,
+    isLoadmore: true,
+    initialNumToRender: 20,
   }
 
   constructor(props) {
@@ -92,6 +93,11 @@ class CustomFlatList extends Component {
     fetchFunction({ page: 1 })
   }
 
+  forceRefresh(isReset = false) {
+    const { fetchFunction } = this.props
+    fetchFunction({ page: 1, isReset })
+  }
+
   onLoadMore() {
     const { fetchFunction, meta } = this.props
     if (meta && meta.next_page) {
@@ -103,10 +109,9 @@ class CustomFlatList extends Component {
     const { data, renderItem, error, loading,
       renderEmpty, renderNoConnection, renderError,
       style, contentContainerStyle, meta,
-      disableRenderNoConnection, disableRenderEmpty,
-      disableRenderError, } = this.props
+      disableRenderNoConnection, disableRenderEmpty, placeholderCount,
+      disableRenderError, isLoadmore, initialNumToRender } = this.props
     const { flatListData } = this.state
-    let isLoadMore = false
 
     const isConnected = getConnectionStatus()
     if (!isConnected && !disableRenderNoConnection) {
@@ -139,25 +144,6 @@ class CustomFlatList extends Component {
       }
     }
 
-    if (loading && meta && data.length > 0) {
-      if (meta.current_page > 1) {
-        isLoadMore = true
-      }
-    }
-
-    const flatListProps = { ...this.props }
-    // remove custom flatlist props, just put default flastlist props
-    delete flatListProps.data
-    delete flatListProps.fetchFunction
-    delete flatListProps.renderItem
-    delete flatListProps.renderEmpty
-    delete flatListProps.renderNoConnection
-    delete flatListProps.renderError
-    delete flatListProps.meta
-    delete flatListProps.style
-    delete flatListProps.contentContainerStyle
-    delete flatListProps.placeholderCount
-
     return (
       <FlatList
         data={flatListData}
@@ -165,21 +151,11 @@ class CustomFlatList extends Component {
         keyExtractor={(item, index) => index.toString()}
         style={[style]}
         contentContainerStyle={[{ paddingBottom: getBottomSpace() }, contentContainerStyle]}
-        onEndReached={_.throttle(this.onLoadMore, 2000)}
+        onEndReached={isLoadmore && this.onLoadMore}
         onRefresh={this.onRefresh}
         refreshing={loading}
-        ListFooterComponent={() => {
-          if (isLoadMore) {
-            return (
-              <Styled.Container>
-                <ActivityIndicator color={Colors.warm_grey} />
-              </Styled.Container>
-            )
-          } else {
-            return null
-          }
-        }}
-        {...flatListProps}
+        initialNumToRender={initialNumToRender}
+        // ListFooterComponent={() => loading && flatListData.length > placeholderCount && <ActivityIndicator />}
       />
     )
   }

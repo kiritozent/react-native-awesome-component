@@ -95,7 +95,7 @@ const ModalList = props => {
         }
         return false
       } else {
-        const toLowerCaseValue = value.toLowerCase();
+        const toLowerCaseValue = value && value.toLowerCase();
         const toLowerCaseItem = item.toLowerCase();
         if (!isEmptyOrSpaces(keyOther)) {
           const toLowerCaseKeyOther = keyOther.toLowerCase();

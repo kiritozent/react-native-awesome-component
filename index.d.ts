@@ -42,6 +42,7 @@ interface IPlaceholderImageProps extends ImageProps {
   resizeMode?: ResizeModeType;
   isCard?: boolean;
   disableAnimation?: boolean;
+  animation?: boolean;
 }
 
 interface IContainerProps {
@@ -82,7 +83,6 @@ interface ICustomHeaderProps {
   iphoneXPadding: boolean;
   isCard: boolean;
   title: string;
-  renderTitle: () => void;
   titleStyle: StyleProp<TextStyle>;
   iconLeft: string;
   titleLeftt: string;
@@ -92,7 +92,7 @@ interface ICustomHeaderProps {
   titleRight: string;
   renderRight: () => void;
   onPressRight: () => void;
-  iconType: IconType;
+  IconType: IconType;
 }
 
 interface IConnectionHandler {
@@ -208,6 +208,8 @@ interface ICustomFlatList<ItemT> extends FlatListProps<ItemT> {
   disableRenderNoConnection?: boolean;
   disableRenderEmpty?: boolean;
   disableRenderError?: boolean;
+  isLoadmore?: boolean;
+  initialNumToRender?: number;
 }
 
 interface ICustomSelect {
@@ -310,6 +312,7 @@ interface ICustomView {
 
 interface IPlaceholderTextProps extends TextProps {
   disableAnimation?: boolean;
+  animation?: boolean;
 }
 
 interface ILoadingModal {
@@ -438,6 +441,7 @@ interface IGlobalConstValue {
   PADDING: number;
   SAFE_AREA_BACKGROUND_COLOR: string;
   BACKGROUND_COLOR: string;
+  PLACEHOLDER_ANIMATION: boolean;
 
   // BUTTON STYLE
   ACTIVE_BUTTON_COLOR: string;
@@ -608,6 +612,7 @@ interface IGlobalConstValue {
 interface IGlobalConst {
   getValue: () => IGlobalConstValue;
   getDefaultValue: () => IGlobalConstValue;
+  setPlaceholderAnimation: (enabled: boolean) => void;
   // CUSTOM BUTTON
   setGlobalActiveButtonColor: (color: string) => void;
   setGlobalActiveButtonTitleColor: (color: string) => void;
