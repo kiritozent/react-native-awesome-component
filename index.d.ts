@@ -130,6 +130,7 @@ interface ICustomHeaderProps {
 
 interface IConnectionHandler {
   onChangeState: (isConnected: boolean) => void;
+  closeInterval: number;
 }
 
 interface ICustomAlertMultiButtonAction {
@@ -734,6 +735,7 @@ interface IGlobalConst {
   setGlobalConnectionHandler400AlertMessage: (value: string) => void;
   setGlobalConnectionHandler500AlertTitle: (value: string) => void;
   setGlobalConnectionHandler500AlertMessage: (value: string) => void;
+  setGlobalConnectionCloseInterval: (value: number) => void;
   // CUSTOM STEP BAR
   setGlobalCustomStepBarHeight: (value: number) => void;
   setGlobalCustomStepBarActiveColor: (value: string) => void;
