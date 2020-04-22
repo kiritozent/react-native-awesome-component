@@ -1,18 +1,51 @@
-import React from 'react';
-import { TextProps, StyleProp, ViewStyle, TextStyle, ImageStyle, FlatListProps, TextInputProps, ListRenderItem, ImageProps } from 'react-native'
+import React from "react";
+import {
+  TextProps,
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  ImageStyle,
+  FlatListProps,
+  TextInputProps,
+  ListRenderItem,
+  ImageProps,
+} from "react-native";
 
 /**
  * CLASS COMPONENT
  */
 
-type ResizeMethodType = "auto" | "resize" | "scale"
-type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center"
-type IconType = 'ant-design' | 'entypo' | 'evil-icons' | 'feather' | 'font-awesome' | 'font-awesome5' | 'fontisto' | 'foundation' | 'ionicons' | 'material-community' | 'material-icons' | 'octicons'
-type AlertType = 'success' | 'error' | 'info' | 'custom-confirm'
-type DatepickerType = 'time' | 'date' | 'datetime'
+type ResizeMethodType = "auto" | "resize" | "scale";
+type ResizeModeType = "cover" | "contain" | "stretch" | "repeat" | "center";
+type IconType =
+  | "ant-design"
+  | "entypo"
+  | "evil-icons"
+  | "feather"
+  | "font-awesome"
+  | "font-awesome5"
+  | "fontisto"
+  | "foundation"
+  | "ionicons"
+  | "material-community"
+  | "material-icons"
+  | "octicons";
+type AlertType = "success" | "error" | "info" | "custom-confirm";
+type DatepickerType = "time" | "date" | "datetime";
 
-type CustomInputLabelType = 'top-label' | 'default' | 'left-label' | 'right-label'
-type CustomInputType = 'email' | 'password' | 'phone' | 'number' | 'text' | 'text-area' | 'phone-country'
+type CustomInputLabelType =
+  | "top-label"
+  | "default"
+  | "left-label"
+  | "right-label";
+type CustomInputType =
+  | "email"
+  | "password"
+  | "phone"
+  | "number"
+  | "text"
+  | "text-area"
+  | "phone-country";
 
 interface ISimpleCountryResponse {
   id: number;
@@ -73,7 +106,7 @@ interface ICustomButtonProps {
   activeTitleStyle: TextProps;
   disableTitleStyle: TextProps;
   loadingColor: string;
-  isCard: boolean
+  isCard: boolean;
 }
 
 interface ICustomHeaderProps {
@@ -96,12 +129,12 @@ interface ICustomHeaderProps {
 }
 
 interface IConnectionHandler {
-  onChangeState: (isConnected: boolean) => void
+  onChangeState: (isConnected: boolean) => void;
 }
 
 interface ICustomAlertMultiButtonAction {
-  title: string,
-  callback: () => void,
+  title: string;
+  callback: () => void;
 }
 
 interface ICustomAlertMultiButtonStyle {
@@ -261,7 +294,7 @@ interface ICustomInput extends TextInputProps {
   maxLength?: number;
   min?: number;
   max?: number;
-  labelType: CustomInputLabelType,
+  labelType: CustomInputLabelType;
   label: string;
   inputType: CustomInputType;
   labelStyle: StyleProp<TextStyle>;
@@ -289,8 +322,8 @@ interface ICustomInput extends TextInputProps {
   hideError: boolean;
 
   // ACTION BUTTON
-  renderLeftAction: () => any,
-  renderRightAction: () => any,
+  renderLeftAction: () => any;
+  renderRightAction: () => any;
 
   // PROPS FOR PHONE COUNTRY TYPE
   valueCountry: ISimpleCountryFlagResponse;
@@ -315,42 +348,44 @@ interface IPlaceholderTextProps extends TextProps {
   animation?: boolean;
 }
 
-interface ILoadingModal {
+interface ILoadingModal {}
 
-}
-
-export class PlaceholderImage extends React.Component<IPlaceholderImageProps> { }
-export class PlaceholderText extends React.Component<IPlaceholderTextProps> { }
-export class CustomButton extends React.Component<ICustomButtonProps> { }
-export class CustomHeader extends React.Component<ICustomHeaderProps> { }
-export class ConnectionHandler extends React.Component<ICustomHeaderProps> { }
-export class CustomAlert extends React.Component<ICustomAlert> { }
-export class CustomStepBar extends React.Component<ICustomStepBar> { }
-export class EmptyContainer extends React.Component<ICustomContainerView> { }
-export class ErrorContainer extends React.Component<ICustomContainerView> { }
-export class NoConnectionContainer extends React.Component<ICustomContainerView> { }
-export class CustomFlatList<ItemT> extends React.Component<ICustomFlatList<ItemT>> { }
-export class CustomSelect extends React.Component<ICustomSelect> { }
-export class CustomDatepicker extends React.Component<ICustomDatepicker> { }
-export class CustomInput extends React.Component<ICustomInput> { }
-export class CustomView extends React.Component<ICustomView> { }
-export class LoadingModal extends React.Component<ILoadingModal> { }
+export class PlaceholderImage extends React.Component<IPlaceholderImageProps> {}
+export class PlaceholderText extends React.Component<IPlaceholderTextProps> {}
+export class CustomButton extends React.Component<ICustomButtonProps> {}
+export class CustomHeader extends React.Component<ICustomHeaderProps> {}
+export class ConnectionHandler extends React.Component<ICustomHeaderProps> {}
+export class CustomAlert extends React.Component<ICustomAlert> {}
+export class CustomStepBar extends React.Component<ICustomStepBar> {}
+export class EmptyContainer extends React.Component<ICustomContainerView> {}
+export class ErrorContainer extends React.Component<ICustomContainerView> {}
+export class NoConnectionContainer extends React.Component<
+  ICustomContainerView
+> {}
+export class CustomFlatList<ItemT> extends React.Component<
+  ICustomFlatList<ItemT>
+> {}
+export class CustomSelect extends React.Component<ICustomSelect> {}
+export class CustomDatepicker extends React.Component<ICustomDatepicker> {}
+export class CustomInput extends React.Component<ICustomInput> {}
+export class CustomView extends React.Component<ICustomView> {}
+export class LoadingModal extends React.Component<ILoadingModal> {}
 
 /**
  * STYLED COMPONENT
  */
 
-declare class Container extends React.Component<IContainerProps> { }
-declare class FlexContainer extends React.Component<IContainerProps> { }
-declare class SafeContainer extends React.Component<IContainerProps> { }
-declare class TouchableContainer extends React.Component<IContainerProps> { }
-declare class H1 extends React.Component<TextProps> { }
-declare class H2 extends React.Component<TextProps> { }
-declare class H3 extends React.Component<TextProps> { }
-declare class H4 extends React.Component<TextProps> { }
-declare class H5 extends React.Component<TextProps> { }
-declare class H6 extends React.Component<TextProps> { }
-declare class H7 extends React.Component<TextProps> { }
+declare class Container extends React.Component<IContainerProps> {}
+declare class FlexContainer extends React.Component<IContainerProps> {}
+declare class SafeContainer extends React.Component<IContainerProps> {}
+declare class TouchableContainer extends React.Component<IContainerProps> {}
+declare class H1 extends React.Component<TextProps> {}
+declare class H2 extends React.Component<TextProps> {}
+declare class H3 extends React.Component<TextProps> {}
+declare class H4 extends React.Component<TextProps> {}
+declare class H5 extends React.Component<TextProps> {}
+declare class H6 extends React.Component<TextProps> {}
+declare class H7 extends React.Component<TextProps> {}
 
 interface IStyled {
   Container: Container;
@@ -366,7 +401,7 @@ interface IStyled {
   H7: H7;
 }
 
-export const Styled: IStyled
+export const Styled: IStyled;
 
 /**
  * METHOD
@@ -389,29 +424,50 @@ interface IObject {
   appendPropsToView: (currentView: any, key: string, value: any) => any;
 }
 
-
-type mergeOrder = "asc" | "desc"
+type mergeOrder = "asc" | "desc";
 
 interface IArray {
-  mergeAndReplace: (oldArray: any[], newArray: any[], key: string, sortId?: string, sortOrder?: mergeOrder, isDate?: boolean) => any[]
-  compareValues: (key: string, order: mergeOrder, isDate: boolean, isTimeToken: boolean) => any[]
+  mergeAndReplace: (
+    oldArray: any[],
+    newArray: any[],
+    key: string,
+    sortId?: string,
+    sortOrder?: mergeOrder,
+    isDate?: boolean
+  ) => any[];
+  compareValues: (
+    key: string,
+    order: mergeOrder,
+    isDate: boolean,
+    isTimeToken: boolean
+  ) => any[];
 }
 
 interface IHelper {
   getFileNameFromPath: (path: string) => void;
   getFileNameFromURL: (url: string) => void;
   getIconByType: (iconType: IconType) => any;
-  getSimpleCountryList: (useFlag: boolean) => ISimpleCountryResponse | ISimpleCountryFlagResponse
+  getSimpleCountryList: (
+    useFlag: boolean
+  ) => ISimpleCountryResponse | ISimpleCountryFlagResponse;
 }
 
 interface IAlertHandler {
   // setAlertInstance: (alert: any) => void;
-  showAlert: (options: ICustomAlertConfiguration, style?: ICustomAlertStyleConfiguration) => void;
+  showAlert: (
+    options: ICustomAlertConfiguration,
+    style?: ICustomAlertStyleConfiguration
+  ) => void;
   hideAlert: () => void;
 }
 
 interface IApiHelper {
-  responseMonitoring: (response: any, callback200: (response: any) => void, callback400: (response: any) => void, callback500: (response: any) => void) => any
+  responseMonitoring: (
+    response: any,
+    callback200: (response: any) => void,
+    callback400: (response: any) => void,
+    callback500: (response: any) => void
+  ) => any;
 }
 
 interface ILoadingHelper {
@@ -427,11 +483,11 @@ interface IMethod {
   Array: IArray;
   Helper: IHelper;
   AlertHandler: IAlertHandler;
-  ApiHelper: IApiHelper,
-  LoadingHelper: ILoadingHelper
+  ApiHelper: IApiHelper;
+  LoadingHelper: ILoadingHelper;
 }
 
-export const Method: IMethod
+export const Method: IMethod;
 
 /**
  * GLOBAL CONST
@@ -473,7 +529,7 @@ interface IGlobalConstValue {
   HEADER_LEFT_ICON_NAME: string;
   HEADER_LEFT_ICON_SIZE: number;
   HEADER_LEFT_ICON_COLOR: string;
-  HEADER_LEFT_BACK_ICON_IMAGE: any,
+  HEADER_LEFT_BACK_ICON_IMAGE: any;
   HEADER_LEFT_BACK_ICON_IMAGE_STYLE: StyleProp<ImageStyle>;
   HEADER_LEFT_ACTION_TITLE_SIZE: number;
   HEADER_LEFT_ACTION_TITLE_COLOR: string;
@@ -593,10 +649,22 @@ interface IGlobalConstValue {
   CUSTOM_INPUT_ERROR_MESSAGE_EMAIL: string;
   CUSTOM_INPUT_ERROR_MESSAGE_PASSWORD: string;
   CUSTOM_INPUT_ERROR_MESSAGE_REQUIRED: (label: string) => string | string;
-  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (label: string, min: number) => string | string;
-  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (label: string, min: number) => string | string;
-  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER: (label: string, min: number) => string | string;
-  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (label: string, min: number) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM: (
+    label: string,
+    min: number
+  ) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM: (
+    label: string,
+    min: number
+  ) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MINIMUM_NUMBER: (
+    label: string,
+    min: number
+  ) => string | string;
+  CUSTOM_INPUT_ERROR_MESSAGE_MAXIMUM_NUMBER: (
+    label: string,
+    min: number
+  ) => string | string;
   CUSTOM_INPUT_PHONE_COUNTRY_PLACEHODLER: string;
   CUSTOM_INPUT_PHONE_COUNTRY_SELECT_LABEL: string;
 
@@ -606,7 +674,7 @@ interface IGlobalConstValue {
   CUSTOM_DATE_PICKER_RIGHT_ICON_COLOR: string;
   CUSTOM_DATE_PICKER_RIGHT_ICON_SIZE: number;
   CUSTOM_DATE_PICKER_RIGHT_ICON_STYLE: StyleProp<TextStyle>;
-  CUSTOM_DATE_PICKER_RIGHT_RENDER: any
+  CUSTOM_DATE_PICKER_RIGHT_RENDER: any;
 }
 
 interface IGlobalConst {
@@ -628,7 +696,15 @@ interface IGlobalConst {
   setGlobalSafeAreaBackgroundColor: (color: string) => void;
   setGlobalBackgroundColor: (color: string) => void;
   setGlobalFontSize: (size: number) => void;
-  setGlobalTypography: (H1?: number, H2?: number, H3?: number, H4?: number, H5?: number, H6?: number, H7?: number) => void;
+  setGlobalTypography: (
+    H1?: number,
+    H2?: number,
+    H3?: number,
+    H4?: number,
+    H5?: number,
+    H6?: number,
+    H7?: number
+  ) => void;
   // CUSTOM HEADER
   setGlobalHeaderHeightSize: (value: number) => void;
   setGlobalHeaderBackgroundColor: (value: string) => void;
@@ -705,11 +781,15 @@ interface IGlobalConst {
   setGlobalCustomSelectHeaderLeftIconName: (value: string) => void;
   setGlobalCustomSelectHeaderLeftIconSize: (value: number) => void;
   setGlobalCustomSelectHeaderLeftIconColor: (value: string) => void;
-  setGlobalCustomSelectHeaderLeftIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectHeaderLeftIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   setGlobalCustomSelectHeaderRightIconName: (value: string) => void;
   setGlobalCustomSelectHeaderRightIconSize: (value: number) => void;
   setGlobalCustomSelectHeaderRightIconColor: (value: string) => void;
-  setGlobalCustomSelectHeaderRightIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectHeaderRightIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   setGlobalCustomSelectHeaderRenderLeft: (value: any) => void;
   setGlobalCustomSelectHeaderRenderRight: (value: any) => void;
   setGlobalCustomSelectHeaderRender: (value: any) => void;
@@ -719,22 +799,32 @@ interface IGlobalConst {
   setGlobalCustomSelectItemSelectIconName: (value: string) => void;
   setGlobalCustomSelectItemSelectIconColor: (value: string) => void;
   setGlobalCustomSelectItemSelectIconSize: (value: number) => void;
-  setGlobalCustomSelectItemSelectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemSelectIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   setGlobalCustomSelectItemUnselectIconName: (value: string) => void;
   setGlobalCustomSelectItemUnselectIconSize: (value: string) => void;
   setGlobalCustomSelectItemUnselectIconColor: (value: number) => void;
-  setGlobalCustomSelectItemUnselectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemUnselectIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   setGlobalCustomSelectItemMultiRender: (value: any) => void;
-  setGlobalCustomSelectItemMultiTitleStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomSelectItemMultiTitleStyle: (
+    value: StyleProp<TextStyle>
+  ) => void;
   setGlobalCustomSelectItemMultiStyle: (value: StyleProp<ViewStyle>) => void;
   setGlobalCustomSelectItemMultiSelectIconName: (value: string) => void;
   setGlobalCustomSelectItemMultiSelectIconColor: (value: string) => void;
   setGlobalCustomSelectItemMultiSelectIconSize: (value: number) => void;
-  setGlobalCustomSelectItemMultiSelectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemMultiSelectIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   setGlobalCustomSelectItemMultiUnselectIconName: (value: string) => void;
   setGlobalCustomSelectItemMultiUnselectIconSize: (value: string) => void;
   setGlobalCustomSelectItemMultiUnselectIconColor: (value: number) => void;
-  setGlobalCustomSelectItemMultiUnselectIconStyle: (value: StyleProp<ImageStyle>) => void;
+  setGlobalCustomSelectItemMultiUnselectIconStyle: (
+    value: StyleProp<ImageStyle>
+  ) => void;
   // CUSTOM INPUT
   setGlobalCustomInputLabelType: (value: CustomInputLabelType) => void;
   setGlobalCustomInputLabelStyle: (value: StyleProp<TextStyle>) => void;
@@ -761,8 +851,10 @@ interface IGlobalConst {
   setGlobalCustomDatePickerRightIconName: (value: string) => void;
   setGlobalCustomDatePickerRightIconColor: (value: string) => void;
   setGlobalCustomDatePickerRightIconSize: (value: number) => void;
-  setGlobalCustomDatePickerRightIconStyle: (value: StyleProp<TextStyle>) => void;
+  setGlobalCustomDatePickerRightIconStyle: (
+    value: StyleProp<TextStyle>
+  ) => void;
   setGlobalCustomDatePickerRightRender: (value: any) => void;
 }
 
-export const GlobalConst: IGlobalConst
+export const GlobalConst: IGlobalConst;
